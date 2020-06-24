@@ -1,0 +1,17 @@
+/* .App {
+    color: black;
+    width: 800;
+}
+#id {
+    width: 50px;
+}
+th {
+    width: 200px;
+} */
+
+.readOnly {
+    background-color: #FBF9F9;
+}
+.table-contacts{
+    width: 2000px !important;
+}

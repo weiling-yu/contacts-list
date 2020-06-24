@@ -1,0 +1,63 @@
+h1 {
+    margin: 20px;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .container {
+    height: 300px;
+    background-color: lightgrey;
+    display: flex;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+  }
+  
+  .left {
+    /* height: 75px; */
+    width: 125px;
+    background-color: DodgerBlue;
+    border: 2px solid grey;
+    /* flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 125px; */
+    flex: 1 0 125px;
+  }
+  .center {
+    /* height: 75px; */
+    width: 125px;
+    background-color: DodgerBlue;
+    border: 2px solid grey;
+    flex-grow: 2;
+    flex-shrink: 1; /*default*/
+  }
+  .right {
+    /* height: 75px; */
+    width: 125px;
+    background-color: DodgerBlue;
+    border: 2px solid grey;
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+  
+  #baseline .center {
+    /* height: 100px; */
+    width: 100px;
+    border: 5px solid turquoise;
+  }
+  
+  #flexstart {
+    align-items: flex-start;
+  }
+  
+  #flexend {
+    align-items: flex-end;
+  }
+  
+  #center {
+    align-items: center;
+  }
+  
+  #baseline {
+      align-items: baseline;
+  }
