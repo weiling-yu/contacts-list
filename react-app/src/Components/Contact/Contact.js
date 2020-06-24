@@ -11,7 +11,6 @@ class Contact extends React.Component {
         this.state = {
             readOnly: true,
             disabled: true,
-            check: '',
             id: '',
             full_name: '',
             email: '',
@@ -27,7 +26,6 @@ class Contact extends React.Component {
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleSaveClick = this.handleSaveClick.bind(this);
         this.hadleCancelClick = this.hadleCancelClick.bind(this);
-        this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
@@ -56,30 +54,19 @@ class Contact extends React.Component {
             country: this.props.contact.country,
         });
     }
+    // remove and edit
     removeContact(data){
         deleteContactName(data).then(()=>{
             this.props.reload();
         })
     }
-    
-    removeSelectedContatcs(data){
-        deleteContactId(data).then(()=>{
-            this.props.reload();
-        })
-    }
-    handleCheckbox(e){
-        this.setState({
-            check: e.target.checked
-        });
-        this.props.addDeleteId(this.props.contact.id);
+    handleRemoveClick() {
+        if (window.confirm('Are you sure you want to delete the contact?')){
+            this.removeContact(this.state.full_name)
+        }
+        this.props.reload();
     }
 
-    handleDeleteSelected(){
-        if(window.confirm('Are you sure you want to delete the contacts you selected?')){
-          this.deleteContactId(this.state.contatc.id);
-        }
-      }
-    
     editContact(id, full_name, email, phone_number, address, dob_dd, dob_mm, dob_yy, gender, country) {
         // console.log(id, full_name, email, phone_number, address, birthday);
         // editContactName(1, 'a', 'a', 'a', 'a', 'a');
@@ -165,10 +152,16 @@ class Contact extends React.Component {
             country: e.target.value,
         })
     }
-
-    handleRemoveClick() {
-
+    // remove multiple selected contacts
+    handleCheckbox(e){
+        if (e.target.checked){
+            this.props.addDeleteId(this.state.id)
+        } 
+        else {
+            this.props.removeDeleteId(this.state.id)
+        }
     }
+
 
 
     render(){
@@ -192,6 +185,7 @@ class Contact extends React.Component {
                 </div>
             );
         }
+        
 
         return ( 
                <tr className='text-center'>

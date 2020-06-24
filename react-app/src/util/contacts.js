@@ -17,7 +17,7 @@ function deleteContactName (fullname){
 }
 
 function deleteContactId (id){
-    let url = `http://localhost:4001/contacts/delete/${id}`;
+    let url = `http://localhost:4001/contacts/deleteById/${id}`;
     return fetch(url,{}
     ).then(response => {
         return response.json().then(jsonResponse => {

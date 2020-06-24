@@ -46,16 +46,16 @@ app.get('/contacts/delete/:full_name', (req, res, next) => {
   });
 });
 
-app.get('/contacts/delete/:id', (req, res, next) => {
+app.get('/contacts/deleteById/:id', (req, res, next) => {
   let deleteId = req.params.id;
-  let query = `DELETE FROM contacts WHERE id='${deleteId}'`;
+  let query = `DELETE FROM contacts WHERE id=${deleteId}`;
 
   connection.query(query, function (error, result, fields){
     if (error) {
       res.send(error);
     } else {  
       res.send({
-        message: `Contact named ${deleteId} was deleted successfully!`
+        message: `Contact id: ${deleteId} was deleted successfully!`
       });
     }
   });

@@ -23,7 +23,7 @@ class App extends React.Component {
     super()
     this.state = {
       readOnly: true,
-      disabled: true,                                                  
+      disabled: true,                                                
       contacts: [],
       deleteIds: []
     }
@@ -35,6 +35,7 @@ class App extends React.Component {
     this.deleteAllContatcs = this.deleteAllContatcs.bind(this);
     this.handleDeleteAll = this.handleDeleteAll.bind(this);
     this.deleteContactId = this.deleteContactId.bind(this);
+    this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
   }
 
   componentDidMount() {
@@ -64,18 +65,6 @@ class App extends React.Component {
       });
     })
   }
-
-  deleteContactId() {
-    for (let i = 0; i < this.state.deleteIds.length; i++){
-      let deletedId = deleteContactId().then(data => {
-        this.setState({
-          contacts: data
-        });
-      })
-    }
-  }
-
-
   deleteAllContatcs(data){
     deleteAllContatcs(data).then(()=>{
         this.reload();
@@ -111,10 +100,36 @@ class App extends React.Component {
     });
   }
 
-  removeDeleteId(){
-    // do later
+  removeDeleteId(id){
+    let deleteIdsLocal = this.state.deleteIds;
+    for (let i = 0; i < deleteIdsLocal.length; i++){
+      if (deleteIdsLocal[i] === id){
+        deleteIdsLocal.splice(i, 1)
+      }
+    }
+    this.setState({
+      deleteIds: deleteIdsLocal
+    });
   }
-  
+
+  deleteContactId() {
+    for (let i = 0; i < this.state.deleteIds.length; i++){
+      let id = this.state.deleteIds[i];
+      let deletedId = deleteContactId(id);
+    }
+    this.setState({
+      deleteIds:[]
+    });
+    console.log(this.state.deleteIds)
+    this.reload();
+    
+  }
+
+  handleDeleteSelected(){
+    if(window.confirm('Are you sure you want to delete the contacts you selected?')){
+      this.deleteContactId();
+    }
+  }
 
 
   render () {
@@ -139,14 +154,16 @@ class App extends React.Component {
         </thead>
         
         <tbody>
-          {this.state.contacts.map(c=>{ return<Contact contact={c} addDeleteId={this.addDeleteId.bind(this)} reload={this.reload} key={c.id} /> })}
+          {this.state.contacts.map(c=>{ return<Contact contact={c} addDeleteId={this.addDeleteId.bind(this)} removeDeleteId={this.removeDeleteId.bind(this)} reload={this.reload} key={c.id} /> })}
         </tbody>
         
     </table>
-    <div style={{marginLeft: "30 px"}}>
-      <button className = "btn btn-light" onClick={this.handleDeleteAll}>Delete All</button>
-      <button className = "btn btn-light" onClick={this.handleDeleteSelected}>Delete Selected</button>
-    </div>
+      <div style={{marginLeft: "30 px"}}>
+        &nbsp;
+        <button className = "btn btn-light" onClick={this.handleDeleteAll}>Delete All</button>
+        &nbsp;
+        <button className = "btn btn-light" onClick={this.handleDeleteSelected}>Delete Selected: {this.state.deleteIds.map(i=> i+',')} </button>
+      </div>
       
       <NewContact reload={this.reload}/>
     </div>
