@@ -10,7 +10,10 @@ class NewContact extends React.Component {
             full_name: '',
             email: '',
             phone_number: '',
-            address : '',
+            street : '',
+            city: '',
+            state: '',
+            zip_code: '',
             dob_dd: '',
             dob_mm: '',
             dob_yy: '',
@@ -22,7 +25,10 @@ class NewContact extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
-        this.handleAddressChange = this.handleAddressChange.bind(this);
+        this.handleStreetChange = this.handleStreetChange.bind(this);
+        this.handleCityChange = this.handleCityChange.bind(this);
+        this.handleStateChange = this.handleStateChange.bind(this);
+        this.handleZipCodeChange = this.handleZipCodeChange.bind(this);
         this.handleDayChange = this.handleDayChange.bind(this);
         this.handleMonthChange = this.handleMonthChange.bind(this);
         this.handleYearChange = this.handleYearChange.bind(this);
@@ -30,8 +36,8 @@ class NewContact extends React.Component {
         this.handleCountryChange = this.handleCountryChange.bind(this);
     }
 
-    insertData (full_name, email, phone_number, address, dob_dd, dob_mm, dob_yy, gender, country){
-        insertContact(full_name, email, phone_number, address, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
+    insertData (full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country){
+        insertContact(full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
             this.props.reload();
         });
         this.setState({
@@ -39,7 +45,10 @@ class NewContact extends React.Component {
             full_name: '',
             email: '',
             phone_number: '',
-            address : '',
+            street : '',
+            city: '',
+            state: '',
+            zip_code: '',
             dob_dd: '', 
             dob_mm: '',
             dob_yy: '',
@@ -48,12 +57,15 @@ class NewContact extends React.Component {
         })
     }
 
-    handleInsertClick(){
+    handleInsertClick(){        
         this.insertData(
             this.state.full_name, 
             this.state.email, 
             this.state.phone_number, 
-            this.state.address, 
+            this.state.street, 
+            this.state.city,
+            this.state.state,
+            this.state.zip_code,
             this.state.dob_dd, 
             this.state.dob_mm, 
             this.state.dob_yy, 
@@ -76,9 +88,24 @@ class NewContact extends React.Component {
             phone_number: e.target.value,
         });
     }
-    handleAddressChange(e){
+    handleStreetChange(e){
         this.setState({
-            address: e.target.value
+           street : e.target.value
+        });
+    };
+    handleCityChange(e){
+        this.setState({
+           city : e.target.value
+        });
+    };
+    handleStateChange(e){
+        this.setState({
+           state : e.target.value
+        });
+    };
+    handleZipCodeChange(e){
+        this.setState({
+           zip_code : e.target.value
         });
     };
     handleDayChange(e){
@@ -113,37 +140,79 @@ class NewContact extends React.Component {
 
 
     render(){
-        
+        let dropdownDay=['dd'];
+        for (let d = 1; d <= 31; d++){
+            dropdownDay.push(d)
+        }
+        const dayList = dropdownDay.map((d)=>{
+            return <option key={d} value={d}>{d}</option>
+        })
+        let dropdownMonth=['mm'];
+        for (let m = 1; m <= 12; m++){
+            dropdownMonth.push(m)
+        }
+        const monthList = dropdownMonth.map((m)=>{
+            return <option key={m} value={m}>{m}</option>
+        })
+
+        let dropdownYear=['yy'];
+        let thisYear = (new Date()).getFullYear();
+        for (let y = 0; y <= 100; y++){
+            dropdownYear.push(thisYear-y)
+        }
+        const yearList = dropdownYear.map((y)=>{
+            return <option key={y} value={y}>{y}</option>
+        })
+
         return(
             <div className="App">
                 <h1>Create New Contact</h1>
                     <table className='table table-striped table-contacts'>
                         <thead>
                         <tr className='thead-dark'>
-                            <th className="text-center" id="id">ID</th>
-                            <th className='text-center' id='fullName'>Full Name</th>
-                            <th className='text-center' id='email'>Email</th>
-                            <th className='text-center' id='phone_number'>Phone</th>
-                            <th className='text-center' id='address'>Address</th>
-                            <th className='text-center' id='birthDay'>Birth Day</th>
-                            <th className="text-center" id="gender">Gender</th>
-                            <th className="text-center" id="county">Country</th>
-                            <th className='text-center' id='action'>Action</th>
+                            <th className="text-center id">ID</th>
+                            <th className='text-center fullName'>Full Name</th>
+                            <th className='text-center email'>Email</th>
+                            <th className='text-center phone_number'>Phone</th>
+                            <th className='text-center address'>Address</th>
+                            <th className='text-center birthDay'>Birth Day</th>
+                            <th className="text-center gender">Gender</th>
+                            <th className="text-center county">Country</th>
+                            <th className='text-center action'>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr className='thead-dark'>
-                            <td className='text-center'><input type='text' id='id' value={this.state.id} readOnly></input></td>
-                            <td className='text-center'><input type='text' id='name' value={this.state.full_name} onChange={this.handleNameChange}></input></td>
-                            <td className='text-center'><input type='text' id='email' value={this.state.email} onChange={this.handleEmailChange}></input ></td>
-                            <td className='text-center'><input type='text' id='number' value={this.state.phone_number} onChange={this.handlePhoneChange}></input></td>
-                            <td className='text-center'><input type='text' id='address' value={this.state.address} onChange={this.handleAddressChange}></input ></td>
+                            <td className='text-center input-id'><input type='text' value={this.state.id} readOnly></input></td>
+                            <td className='text-center input-name'><input type='text' value={this.state.full_name} onChange={this.handleNameChange}></input></td>
+                            <td className='text-center input-email'><input type='text' value={this.state.email} onChange={this.handleEmailChange}></input ></td>
+                            <td className='text-center input-number'><input type='text' value={this.state.phone_number} onChange={this.handlePhoneChange}></input></td>
+
+                            <td className='text-center address'>
+                                <input type='text' className='input-street' value={this.state.street} onChange={this.handleStreetChange} placeholder='street' size='25'></input >&nbsp;
+                                <input type='text' className='input-city' value={this.state.city} onChange={this.handleCityChange} placeholder='city' size='15'></input >&nbsp;
+                                <input type='text' className='input-state' value={this.state.state} onChange={this.handleStateChange} placeholder='state' size='3'></input >&nbsp;
+                                <input type='text' className='input-zip-code' value={this.state.zip_code} onChange={this.handleZipCodeChange} placeholder='zip code' size='6'></input >
+                            </td>
+
                             {/* <td className='text-center'><input type='text' id='birthday' value={this.state.birthday} onChange={this.handleBirthdayChange}></input ></td> */}
                             
-                            <td className='text-center'>
+                            {/* <td className='text-center'>
                                 <input id='dob_dd' type='text' value={this.state.dob_dd}  onChange={this.handleDayChange} maxLength='2'></input>
                                 <input id='dob_mm' type='text' value={this.state.dob_mm} onChange={this.handleMonthChange} maxLength='2'></input>
                                 <input id='dob_yy' type='text' value={this.state.dob_yy} onChange={this.handleYearChange} maxLength='4'></input>
+                            </td> */}
+
+                            <td className='text-center'>
+                                <select name='dob_dd' value={this.state.dob_dd} onChange={this.handleDayChange}>
+                                    {dayList}
+                                </select>&nbsp;
+                                <select name='dob_mm' value={this.state.dob_mm} onChange={this.handleMonthChange}>
+                                    {monthList}
+                                </select>&nbsp;
+                                <select name='dob_yy' value={this.state.dob_yy} onChange={this.handleYearChange}>
+                                    {yearList}
+                                </select>
                             </td>
 
                             <td className='text-center'>

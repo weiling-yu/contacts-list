@@ -1,16 +1,18 @@
-td #dob_dd{
-    width: 30px;
+::placeholder{
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
 }
-td #dob_mm{
-    width: 30px;
+td  input .address{
+    text-transform: capitalize;
 }
-td #dob_yy{
-    width: 60px;
+td .full_name, address {
+    text-transform: capitalize;
 }
-td #dob_dd, #dob_mm, #dob_yy{
-    padding: 2px;
-    margin: 2px;
+td .email {
+    text-transform: lowercase;
 }
+
 
 
 /* @media only screen and (max-width: 780px), (orientation: portrait)

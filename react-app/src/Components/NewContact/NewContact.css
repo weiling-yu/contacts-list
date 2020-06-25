@@ -1,6 +1,19 @@
 .table-new-contact {
     width: 2000px;
 }
+::placeholder {
+    text-transform: uppercase;
+    text-align: center;
+}
+input .input-state {
+    text-transform: uppercase;
+}
+td .input-full_name, .input-address {
+    text-transform: capitalize;
+}
+td .input-email {
+    text-transform: lowercase;
+}
 
 /* .app {
     border-radius: 50px;

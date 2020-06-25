@@ -15,7 +15,10 @@ class Contact extends React.Component {
             full_name: '',
             email: '',
             phone_number: '',
-            address : '',
+            street : '',
+            city: '',
+            state: '',
+            zip_code: '',
             dob_dd: '',
             dob_mm: '',
             dob_yy: '',
@@ -30,7 +33,10 @@ class Contact extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handleAddressChange = this.handleAddressChange.bind(this);
+        this.handleStreetChange = this.handleStreetChange.bind(this);
+        this.handleCityChange = this.handleCityChange.bind(this);
+        this.handleStateChange = this.handleStateChange.bind(this);
+        this.handleZipCodeChange = this.handleZipCodeChange.bind(this);
         this.handleDayChange = this.handleDayChange.bind(this); 
         this.handleMonthChange = this.handleMonthChange.bind(this);
         this.handleYearChange = this.handleYearChange.bind(this);
@@ -46,7 +52,10 @@ class Contact extends React.Component {
             full_name: this.props.contact.full_name,
             email: this.props.contact.email,
             phone_number: this.props.contact.phone_number,
-            address : this.props.contact.address,
+            street : this.props.contact.street,
+            city : this.props.contact.city,
+            state : this.props.contact.state,
+            zip_code : this.props.contact.zip_code,
             dob_dd: this.props.contact.dob_dd,
             dob_mm: this.props.contact.dob_mm,
             dob_yy: this.props.contact.dob_yy,
@@ -56,21 +65,21 @@ class Contact extends React.Component {
     }
     // remove and edit
     removeContact(data){
-        deleteContactName(data).then(()=>{
+        deleteContactId(data).then(()=>{
             this.props.reload();
         })
     }
     handleRemoveClick() {
         if (window.confirm('Are you sure you want to delete the contact?')){
-            this.removeContact(this.state.full_name)
+            this.removeContact(this.state.id)
         }
         this.props.reload();
     }
 
-    editContact(id, full_name, email, phone_number, address, dob_dd, dob_mm, dob_yy, gender, country) {
+    editContact(id, full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country) {
         // console.log(id, full_name, email, phone_number, address, birthday);
         // editContactName(1, 'a', 'a', 'a', 'a', 'a');
-        editContactName(id, full_name, email, phone_number, address, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
+        editContactName(id, full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
             this.props.reload();
         })
     }
@@ -82,7 +91,7 @@ class Contact extends React.Component {
         });
     }
     handleSaveClick(){
-        this.editContact(this.state.id, this.state.full_name, this.state.email, this.state.phone_number, this.state.address, this.state.dob_dd, this.state.dob_mm, this.state.dob_yy, this.state.gender, this.state.country);
+        this.editContact(this.state.id, this.state.full_name, this.state.email, this.state.phone_number, this.state.street, this.state.city, this.state.state, this.state.zip_code, this.state.dob_dd, this.state.dob_mm, this.state.dob_yy, this.state.gender, this.state.country);
         this.setState({
             readOnly: !this.state.readOnly,
             disabled: !this.state.disabled,
@@ -96,7 +105,10 @@ class Contact extends React.Component {
             full_name: this.props.contact.full_name,
             email: this.props.contact.email,
             phone_number: this.props.contact.phone_number,
-            address : this.props.contact.address,
+            street : this.props.contact.street,
+            city : this.props.contact.city,
+            state : this.props.contact.state,
+            zip_code : this.props.contact.zip_code,
             dob_dd: this.props.contact.dob_dd,
             dob_mm: this.props.contact.dob_mm,
             dob_yy: this.props.contact.dob_yy,
@@ -122,9 +134,24 @@ class Contact extends React.Component {
             phone_number: e.target.value,
         });
     }
-    handleAddressChange(e){
+    handleStreetChange(e){
         this.setState({
-            address: e.target.value,
+            street: e.target.value,
+        });
+    }
+    handleCityChange(e){
+        this.setState({
+            city: e.target.value,
+        });
+    }
+    handleStateChange(e){
+        this.setState({
+            state: e.target.value,
+        });
+    }
+    handleZipCodeChange(e){
+        this.setState({
+            zip_code: e.target.value,
         });
     }
     handleDayChange(e){
@@ -185,23 +212,54 @@ class Contact extends React.Component {
                 </div>
             );
         }
+        // birthday dropdown
+        let dropdownDays=['dd'];
+        for (let d = 1 ; d <= 31; d++){
+            dropdownDays.push(d)
+        }
+        const dayList = dropdownDays.map((d)=>{return <option key={d} value={d}>{d}</option>})
         
+        let dropdownMonths=['mm'];
+        for (let m = 1 ; m <= 12; m++){
+            dropdownMonths.push(m)
+        }
+        const monthList = dropdownMonths.map((m)=>{return <option key={m} value={m}>{m}</option>})
+
+        let thisYear = (new Date()).getFullYear();
+        let dropdownYears = ['yy'];
+        for (let y = 0 ; y <= 100; y++){
+            dropdownYears.push(thisYear-y)
+        }
+        const yearList = dropdownYears.map((y)=>{return <option key={y} value={y}>{y}</option>})
 
         return ( 
                <tr className='text-center'>
-                    <td id='checkbox'><input type='checkbox' id={this.state.id} onChange={this.handleCheckbox}></input></td>
-                    <td id="id"><input className="readOnly text-center" type="text" value={this.state.id} readOnly={readOnly}></input></td>
-                    <td id='fullName'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange}></input></td>
-                    <td id='email'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange}></input></td>
-                    <td id='phone'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange}></input></td>
-                    <td id='address'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.address} readOnly={readOnly} onChange={this.handleAddressChange}></input></td>
-                    
-                    <td ><input id='dob_dd' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_dd} readOnly={readOnly} onChange={this.handleDayChange} maxLength='2'></input>
+                    <td className='checkbox'><input type='checkbox' id={this.state.id} onChange={this.handleCheckbox}></input></td>
+                    <td className="id"><input className="readOnly text-center" type="text" value={this.state.id} readOnly={readOnly}></input></td>
+                    <td className='fullName'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange}></input></td>
+                    <td className='email'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange}></input></td>
+                    <td className='phone'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange}></input></td>
+                    <td className='address'>
+                        <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} size='25'></input>&nbsp;
+                        <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15'></input>&nbsp;
+                        <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='3'></input>&nbsp;
+                        <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='6'></input>
+                    </td>
+                
+                    <td className="birthday">
+                        {/* use input
+                        <input id='dob_dd' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_dd} readOnly={readOnly} onChange={this.handleDayChange} maxLength='2'></input>
                         <input id='dob_mm' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_mm} readOnly={readOnly} onChange={this.handleMonthChange} maxLength='2'></input>
-                        <input id='dob_yy' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_yy} readOnly={readOnly} onChange={this.handleYearChange} maxLength='4'></input>
+                        <input id='dob_yy' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_yy} readOnly={readOnly} onChange={this.handleYearChange} maxLength='4'></input> */}
+                        <select name='dob_dd' className={this.state.disabled ? 'disabled' : '' } type='text' value={this.state.dob_dd} disabled={disabled} onChange={this.handleDayChange}> 
+                            {dayList}</select>&nbsp;
+                        <select name='dob_mm' className={this.state.disabled ? 'disabled' : '' } type='text' value={this.state.dob_mm} disabled={disabled} onChange={this.handleMonthChange}>
+                            {monthList}</select>&nbsp;
+                        <select name='dob_yy' className={this.state.disabled ? 'disabled' : '' } type='text' value={this.state.dob_yy} disabled={disabled} onChange={this.handleYearChange}>
+                            {yearList}</select>
                     </td>
                     
-                    <td id="gender">
+                    <td className="gender">
                         <select name="gender" className={this.state.disabled ? 'disabled' : ''} type='text' value={this.state.gender} disabled={disabled} onChange={this.handleGenderChange}>
                             <option value="male">Male</option>
                             <option value="female">Female</option>

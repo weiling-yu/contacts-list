@@ -28,13 +28,13 @@ class App extends React.Component {
       deleteIds: []
     }
     this.getContacts = this.getContacts.bind(this);
-    this.deleteContactName = this.deleteContactName.bind(this);
+    this.deleteContactId = this.deleteContactId.bind(this);
     this.editContactName = this.editContactName.bind(this);
     this.insertContact = this.insertContact.bind(this);
     this.reload = this.reload.bind(this);
     this.deleteAllContatcs = this.deleteAllContatcs.bind(this);
     this.handleDeleteAll = this.handleDeleteAll.bind(this);
-    this.deleteContactId = this.deleteContactId.bind(this);
+    this.deleteSelectedContact = this.deleteSelectedContact.bind(this);
     this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
   }
 
@@ -58,8 +58,8 @@ class App extends React.Component {
     })
   }
 
-  deleteContactName() {
-    let deletedName = deleteContactName().then(data => {
+  deleteContactId() {
+    let deletedId = deleteContactId().then(data => {
       this.setState({
         contacts: data
       });
@@ -112,7 +112,7 @@ class App extends React.Component {
     });
   }
 
-  deleteContactId() {
+  deleteSelectedContact() {
     for (let i = 0; i < this.state.deleteIds.length; i++){
       let id = this.state.deleteIds[i];
       let deletedId = deleteContactId(id);
@@ -120,14 +120,13 @@ class App extends React.Component {
     this.setState({
       deleteIds:[]
     });
-    console.log(this.state.deleteIds)
     this.reload();
     
   }
 
   handleDeleteSelected(){
     if(window.confirm('Are you sure you want to delete the contacts you selected?')){
-      this.deleteContactId();
+      this.deleteSelectedContact();
     }
   }
 
@@ -140,16 +139,16 @@ class App extends React.Component {
       <table className='table table-striped table-contacts'>
         <thead>
         <tr className='thead-dark'>
-          <th className="text-center" id="id"></th>
-          <th className="text-center" id="id">ID</th>
-          <th className='text-center' id='fullName'>Full Name</th>
-          <th className='text-center' id='email'>Email</th>
-          <th className='text-center' id='phone_number'>Phone</th>
-          <th className='text-center' id='address'>Address</th>
-          <th className='text-center' id='birthDay'>Birth Day</th>
-          <th className="text-center" id="gender">Gender</th>
-          <th className="text-center" id="county">Country</th>
-          <th className='text-center' id='action'>Action</th>
+          <th className="text-center"></th>
+          <th className="text-center id">ID</th>
+          <th className='text-center fullName'>Full Name</th>
+          <th className='text-center email'>Email</th>
+          <th className='text-center phone_number'>Phone</th>
+          <th className='text-center address'>Address</th>
+          <th className='text-center birthDay'>Birth Day</th>
+          <th className="text-center gender">Gender</th>
+          <th className="text-center county">Country</th>
+          <th className='text-center action'>Action</th>
         </tr>
         </thead>
         

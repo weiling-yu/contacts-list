@@ -75,42 +75,48 @@ app.get('/contacts/delete_all', (req, res, next) => {
   });
 });
 
-app.get('/contacts/insert/:full_name/:email/:phone_number/:address/:dob_dd/:dob_mm/:dob_yy/:gender/:country', (req, res, next) => {
+app.get('/contacts/insert/:full_name/:email/:phone_number/:street/:city/:state/:zip_code/:dob_dd/:dob_mm/:dob_yy/:gender/:country', (req, res, next) => {
   let valueName = req.params.full_name;
   let valueEmail = req.params.email;
   let valueNumber = req.params.phone_number;
-  let valueaddress = req.params.address;
+  let valueStreet = req.params.street;
+  let valueCity = req.params.city;
+  let valueState = req.params.state;
+  let valueZipCode = req.params.zip_code;
   let valueDay = req.params.dob_dd;
   let valueMonth = req.params.dob_mm;
   let valueYear = req.params.dob_yy;
   let valueGender = req.params.gender;
   let valueCountry = req.params.country; 
-  let query = `INSERT INTO contacts (full_name, email, phone_number, address, dob_dd, dob_mm, dob_yy, gender, country) 
-    VALUES ("${valueName}", "${valueEmail}", "${valueNumber}", "${valueaddress}", ${valueDay}, ${valueMonth}, ${valueYear}, "${valueGender}", "${valueCountry}")`;          
+  let query = `INSERT INTO contacts (full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country) 
+    VALUES ("${valueName}", "${valueEmail}", "${valueNumber}", "${valueStreet}", "${valueCity}", "${valueState}", "${valueZipCode}", ${valueDay}, ${valueMonth}, ${valueYear}, "${valueGender}", "${valueCountry}")`;          
   connection.query(query, function (error, result, fields){
     if (error) {
       res.send(error);
     } else {
       res.send({
-        message: `Contact named ${valueName}, ${valueEmail}, ${valueNumber}, ${valueaddress}, ${valueDay}, ${valueMonth}, ${valueYear}, ${valueGender}, ${valueCountry} was inserted successfully!`
+        message: `Contact named ${valueName}, ${valueEmail}, ${valueNumber}, ${valueStreet}, ${valueCity}, ${valueState}, ${valueZipCode}, ${valueDay}, ${valueMonth}, ${valueYear}, ${valueGender}, ${valueCountry} was inserted successfully!`
       });
     }
   });
 });
 
-app.get('/contacts/edit/:id/:full_name/:email/:phone_number/:address/:dob_dd/:dob_mm/:dob_yy/:gender/:country', (req, res, next) => {
+app.get('/contacts/edit/:id/:full_name/:email/:phone_number/:street/:city/:state/:zip_code/:dob_dd/:dob_mm/:dob_yy/:gender/:country', (req, res, next) => {
   let editId = req.params.id;
   let editName = req.params.full_name;
   let editEmail = req.params.email;
   let editNumber = req.params.phone_number;
-  let editaddress = req.params.address;
+  let editStreet  = req.params.street;
+  let editCity = req.params.city;
+  let editState = req.params.state;
+  let editZipCode = req.params.zip_code;
   let editDay = req.params.dob_dd;
   let editMonth = req.params.dob_mm;
   let editYear = req.params.dob_yy;
   let editGender = req.params.gender;
   let editCountry = req.params.country; 
   let query = `UPDATE contacts SET 
-      full_name= "${editName}", email= "${editEmail}", phone_number= "${editNumber}", address= "${editaddress}", dob_dd= "${editDay}", dob_mm="${editMonth}", dob_yy="${editYear}", gender= "${editGender}", country= "${editCountry}"
+      full_name= "${editName}", email= "${editEmail}", phone_number= "${editNumber}", street= "${editStreet}", city="${editCity}", state="${editState}", zip_code="${editZipCode}", dob_dd= ${editDay}, dob_mm=${editMonth}, dob_yy=${editYear}, gender= "${editGender}", country= "${editCountry}"
       WHERE id=${editId}`;
   connection.query(query, function (error, result, fields){
     if (error) {
