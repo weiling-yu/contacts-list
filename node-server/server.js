@@ -21,8 +21,9 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/contacts', (req, res, next) => {
-    connection.query('SELECT * from contacts', function (error, results, fields) {
+app.get('/contacts/', (req, res, next) => {
+  let sql = `SELECT * from contacts`;
+    connection.query(sql, function (error, results, fields) {
         if (error) {
             res.send(error);
         } else {
@@ -128,6 +129,19 @@ app.get('/contacts/edit/:id/:full_name/:email/:phone_number/:street/:city/:state
     }
   });
 })
+
+app.get('/contacts/:field/:direction', (req, res, next) => {
+  let field = req.params.field;
+  let direction = req.params.direction
+  let sql = `SELECT * from contacts ORDER BY ${field} ${direction}`;
+  connection.query(sql, function (error, results, fields) {
+    if (error) {
+        res.send(error);
+    } else {
+        res.send(results);
+    }
+  });
+});
 
 
 

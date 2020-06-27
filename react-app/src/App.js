@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId } from './util/contacts';
+import { getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId, sortField } from './util/contacts';
 import Contact from './Components/Contact/Contact';
 import NewContact from './Components/NewContact/NewContacts';
 
@@ -25,9 +25,11 @@ class App extends React.Component {
       readOnly: true,
       disabled: true,                                                
       contacts: [],
-      deleteIds: []
+      deleteIds: [],
+      sortAscending: true,
     }
     this.getContacts = this.getContacts.bind(this);
+    this.sortField = this.sortField.bind(this);
     this.deleteContactId = this.deleteContactId.bind(this);
     this.editContactName = this.editContactName.bind(this);
     this.insertContact = this.insertContact.bind(this);
@@ -36,6 +38,7 @@ class App extends React.Component {
     this.handleDeleteAll = this.handleDeleteAll.bind(this);
     this.deleteSelectedContact = this.deleteSelectedContact.bind(this);
     this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
@@ -130,8 +133,35 @@ class App extends React.Component {
     }
   }
 
+  sortField(field, direction){
+    let sorted = sortField(field, direction).then(data => {
+      this.setState({
+        contacts: data
+      });
+    });    
+  }
+
+  handleSort(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending) {
+      direction = 'DESC';
+    }
+    this.sortField('id', direction);
+    this.setState({
+      sortAscending: !this.state.sortAscending,
+    })
+  }
+
 
   render () {
+    let fieldId;
+    if (this.state.sortAscending){
+      fieldId = <a onClick={this.handleSortdirection}>ID<span>&#8593;</span></a>;
+    } else {
+      fieldId = <a onClick={this.handleSortdirection}>ID<span>&#8595;</span></a>;
+    }
+    
+
 
     return (
     <div className="App">
@@ -140,7 +170,7 @@ class App extends React.Component {
         <thead>
         <tr className='thead-dark'>
           <th className="text-center"></th>
-          <th className="text-center id">ID</th>
+          <th className="text-center id">{fieldId}</th>
           <th className='text-center fullName'>Full Name</th>
           <th className='text-center email'>Email</th>
           <th className='text-center phone_number'>Phone</th>

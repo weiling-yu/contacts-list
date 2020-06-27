@@ -68,7 +68,19 @@ function editContactName (id,full_name, email, phone_number, street, city, state
         });
 }
 
-export {getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId};
+function sortField (field, direction){
+    let url = `http://localhost:4001/contacts/${field}/${direction}`;
+    return fetch(url
+        ).then(response =>{
+            return response.json();
+        }).then(jsonResponse =>{
+            return jsonResponse
+        });
+}
+
+
+
+export {getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId, sortField };
 
 //import { response } from "express"
 // function getContacts (){
