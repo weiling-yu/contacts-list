@@ -235,12 +235,12 @@ class Contact extends React.Component {
         return ( 
                <tr className='text-center'>
                     <td className='checkbox'><input type='checkbox' id={this.state.id} onChange={this.handleCheckbox}></input></td>
-                    <td className="id"><input className="readOnly text-center" type="text" value={this.state.id} readOnly={readOnly}></input></td>
-                    <td className='fullName'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange}></input></td>
-                    <td className='email'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange}></input></td>
-                    <td className='phone'><input className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange}></input></td>
-                    <td className='address'>
-                        <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} size='25'></input>&nbsp;
+                    <td className='idList'><input className="readOnly text-center idList" type="text" value={this.state.id} readOnly={readOnly}></input></td>
+                    <td className='fullNameList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange}></input></td>
+                    <td className='emailList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange}></input></td>
+                    <td className='numberList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange}></input></td>
+                    <td className='addressList'>
+                        <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} size='25'></input><br/>
                         <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15'></input>&nbsp;
                         <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='3'></input>&nbsp;
                         <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='6'></input>

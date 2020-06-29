@@ -12,6 +12,20 @@ th {
 .readOnly {
     background-color: #FBF9F9;
 }
-.table-contacts{
+/* .table-contacts{
     width: 2000px !important;
+} */
+
+
+.fieldId {
+    width: 50px;
+}
+.fieldFullName, .fieldEmail {
+    width: 200px;
+}
+.fieldEmail {
+    width: 245px;
+}
+.fieldPhoneNumber {
+    width: 150px;
 }

@@ -26,7 +26,15 @@ class App extends React.Component {
       disabled: true,                                                
       contacts: [],
       deleteIds: [],
-      sortAscending: true,
+      sortAscending: {
+        id: true,
+        full_name: true,
+        email: true,
+        phone_number: true,
+        gender: true,
+        country: true
+      }
+      
     }
     this.getContacts = this.getContacts.bind(this);
     this.sortField = this.sortField.bind(this);
@@ -38,7 +46,7 @@ class App extends React.Component {
     this.handleDeleteAll = this.handleDeleteAll.bind(this);
     this.deleteSelectedContact = this.deleteSelectedContact.bind(this);
     this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
-    this.handleSort = this.handleSort.bind(this);
+    this.handleSortId = this.handleSortId.bind(this);
   }
 
   componentDidMount() {
@@ -141,26 +149,120 @@ class App extends React.Component {
     });    
   }
 
-  handleSort(e){
+  handleSortId(e){
     let direction = 'ASC';
-    if (!this.state.sortAscending) {
+    if (!this.state.sortAscending.id) {
       direction = 'DESC';
     }
     this.sortField('id', direction);
-    this.setState({
-      sortAscending: !this.state.sortAscending,
+    this.setState( prevState =>{
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.id= !prevState.sortAscending.id;
+      return {sortAscending}
+      })
+  }
+  handleSortFullName(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending.full_name) {
+      direction = 'DESC';
+    }
+    this.sortField('full_name', direction);
+    this.setState( prevState =>{
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.full_name= !prevState.sortAscending.full_name;
+      return {sortAscending};
     })
+  }
+  handleSortEmail(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending.email) {
+      direction = 'DESC';
+    }
+    this.sortField('email', direction);
+    this.setState( prevState =>{
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.email= !prevState.sortAscending.email;
+      return {sortAscending}
+      })
+  }
+
+  handleSortPhoneNumber(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending.phone_number) {
+      direction = 'DESC';
+    }
+    this.sortField('phone_number', direction);
+    this.setState( prevState => {
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.phone_number= !prevState.sortAscending.phone_number;
+      return {sortAscending};
+    })
+  }
+  handleSortAGender(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending.gender) {
+      direction = 'DESC';
+    }
+    this.sortField('id', direction);
+    this.setState( prevState =>{
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.gender= !prevState.sortAscending.gender;
+      return {sortAscending}
+      }
+    )
+  }
+
+  handleSortClick(field) {
+    if (field === 'id') {
+      return this.handleSortId.bind(this);
+    }
+    if (field === 'full_name') {
+      return this.handleSortFullName.bind(this);
+    }
+    if (field === 'email') {
+      return this.handleSortEmail.bind(this);
+    }
+    if (field === 'phone_number') {
+      return this.handleSortPhoneNumber.bind(this);
+    }
+    if (field === 'gender') {
+      return this.handleSortAGender.bind(this);
+    }
   }
 
 
   render () {
     let fieldId;
-    if (this.state.sortAscending){
-      fieldId = <a onClick={this.handleSortdirection}>ID<span>&#8593;</span></a>;
+    if (this.state.sortAscending.id){
+      fieldId = <a onClick={this.handleSortClick('id')}>ID<span>&#8593;</span></a>;
     } else {
-      fieldId = <a onClick={this.handleSortdirection}>ID<span>&#8595;</span></a>;
+      fieldId = <a onClick={this.handleSortClick('id')}>ID<span>&#8595;</span></a>;
     }
-    
+    let fieldFullName;
+    if (this.state.sortAscending.full_name){
+      fieldFullName = <a onClick={this.handleSortClick('full_name')}>Full Name<span>&#8593;</span></a>;
+    } else {
+      fieldFullName = <a onClick={this.handleSortClick('full_name')}>Full Name<span>&#8595;</span></a>;
+    }
+    let fieldEmail;
+    if (this.state.sortAscending.email){
+      fieldEmail = <a onClick={this.handleSortClick('email')}>Email<span>&#8593;</span></a>;
+    } else {
+      fieldEmail = <a onClick={this.handleSortClick('email')}>Email<span>&#8595;</span></a>;
+    }
+
+    let fieldPhoneNumber;
+    if (this.state.sortAscending.phone_number){
+      fieldPhoneNumber = <a onClick={this.handleSortClick('phone_number')}>Phone<span>&#8593;</span></a>;
+    } else {
+      fieldPhoneNumber = <a onClick={this.handleSortClick('phone_number')}>Phone<span>&#8595;</span></a>;
+    }
+    let fieldGender;
+    if (this.state.sortAscending.gender){
+      fieldGender = <a onClick={this.handleSortClick('gender')}>Gender<span>&#8593;</span></a>;
+    } else {
+      fieldGender = <a onClick={this.handleSortClick('gender')}>Gender<span>&#8595;</span></a>;
+    }
 
 
     return (
@@ -170,13 +272,13 @@ class App extends React.Component {
         <thead>
         <tr className='thead-dark'>
           <th className="text-center"></th>
-          <th className="text-center id">{fieldId}</th>
-          <th className='text-center fullName'>Full Name</th>
-          <th className='text-center email'>Email</th>
-          <th className='text-center phone_number'>Phone</th>
-          <th className='text-center address'>Address</th>
+          <th className="text-center fieldId">{fieldId}</th>
+          <th className='text-center fieldFullName'>{fieldFullName}</th>
+          <th className='text-center fieldEmail'>{fieldEmail}</th>
+          <th className='text-center fieldPhoneNumber'>{fieldPhoneNumber}</th>
+          <th className='text-center fieldAddress'>Address</th>
           <th className='text-center birthDay'>Birth Day</th>
-          <th className="text-center gender">Gender</th>
+          <th className="text-center fieldGender">{fieldGender}</th>
           <th className="text-center county">Country</th>
           <th className='text-center action'>Action</th>
         </tr>

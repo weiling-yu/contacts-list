@@ -12,8 +12,43 @@ td .full_name, address {
 td .email {
     text-transform: lowercase;
 }
+/* .fullNameList, .emailList, .numberList, .addressList{ */
+tr .idList {
+    background-color: blueviolet;
+    width: 50px;
+    padding: 0px;
+}
+tr .fullNameList{
+    background-color: burlywood;
+    padding: 0px;
+}
+tr .emailList{
+    background-color: olive;
+    padding: 0px;
+}
+tr .numberList {
+    background-color: orange
+}
+tr .addressList {
+    background-color: peachpuff;
+}
+tr .addressList {
+    width: 300px;
+}
+/* input .idList {
+    background-color: brown;
+}
 
+td .idList {
+    width: 50px;
+}
+td .numberList {
+    width: 150px;
+}
 
+td .addressList {
+    width: 245px;
+} */
 
 /* @media only screen and (max-width: 780px), (orientation: portrait)
 {
