@@ -1,31 +1,28 @@
-/* .App {
-    color: black;
-    width: 800;
+.App {
+    overflow-x: auto;
 }
-#id {
-    width: 50px;
-}
-th {
-    width: 200px;
-} */
+
 
 .readOnly {
     background-color: #FBF9F9;
 }
-/* .table-contacts{
-    width: 2000px !important;
-} */
+.table-contacts{
+    width: 100%;
+}
 
 
 .fieldId {
     width: 50px;
 }
-.fieldFullName, .fieldEmail {
-    width: 200px;
+input {
+    border: solid 0.5px  rgba(118, 118, 118, 0.3);
+    border-radius: 0.2rem;
+    opacity: 0.7;
+    
 }
-.fieldEmail {
-    width: 245px;
-}
-.fieldPhoneNumber {
-    width: 150px;
+
+thead th {
+    border: white solid 1px;
+    padding: 6px 2px;
+    vertical-align: middle;
 }

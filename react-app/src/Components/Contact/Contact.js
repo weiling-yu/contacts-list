@@ -236,40 +236,46 @@ class Contact extends React.Component {
                <tr className='text-center'>
                     <td className='checkbox'><input type='checkbox' id={this.state.id} onChange={this.handleCheckbox}></input></td>
                     <td className='idList'><input className="readOnly text-center idList" type="text" value={this.state.id} readOnly={readOnly}></input></td>
-                    <td className='fullNameList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange}></input></td>
-                    <td className='emailList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange}></input></td>
-                    <td className='numberList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange}></input></td>
+                    <td className='fullNameList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange} ></input></td>
+                    <td className='email-number-container'>
+                        <div className='flexbox-email'>
+                            <input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange} ></input>
+                        </div>
+                        <div className='flexbox-number'>
+                            <input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange} ></input>
+                        </div>
+                    </td>
                     <td className='addressList'>
-                        <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} size='25'></input><br/>
-                        <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15'></input>&nbsp;
-                        <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='3'></input>&nbsp;
-                        <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='6'></input>
+                        <div className='address-container'>
+                            <div className='flexbox-address1'>
+                                <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center flexbox-street' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} ></input><br/>
+                            </div>
+                            <div className='flexbox-address2'>
+                                <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center flexbox-city' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15'></input>&nbsp;
+                                <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center flexbox-state' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='2'></input>&nbsp;
+                                <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center flexbox-zip' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='5'></input>
+                            </div>
+                        </div>
                     </td>
-                
-                    <td className="birthday">
-                        {/* use input
-                        <input id='dob_dd' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_dd} readOnly={readOnly} onChange={this.handleDayChange} maxLength='2'></input>
-                        <input id='dob_mm' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_mm} readOnly={readOnly} onChange={this.handleMonthChange} maxLength='2'></input>
-                        <input id='dob_yy' className={this.state.readOnly ? 'readOnly text-center' : ''} type='text' value={this.state.dob_yy} readOnly={readOnly} onChange={this.handleYearChange} maxLength='4'></input> */}
-                        <select name='dob_dd' className={this.state.disabled ? 'disabled' : '' } type='text' value={this.state.dob_dd} disabled={disabled} onChange={this.handleDayChange}> 
-                            {dayList}</select>&nbsp;
-                        <select name='dob_mm' className={this.state.disabled ? 'disabled' : '' } type='text' value={this.state.dob_mm} disabled={disabled} onChange={this.handleMonthChange}>
-                            {monthList}</select>&nbsp;
-                        <select name='dob_yy' className={this.state.disabled ? 'disabled' : '' } type='text' value={this.state.dob_yy} disabled={disabled} onChange={this.handleYearChange}>
-                            {yearList}</select>
-                    </td>
-                    
-                    <td className="gender">
-                        <select name="gender" className={this.state.disabled ? 'disabled' : ''} type='text' value={this.state.gender} disabled={disabled} onChange={this.handleGenderChange}>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name='country' className={this.state.disabled ? 'disabled' : ''} type='text' value={this.state.country} disabled={disabled} onChange={this.handleCountryChange}>
-                            <option value='taiwan'>Taiwan</option>
-                            <option value='chile'>Chile</option>
-                        </select>
+                    <td className='flexbox-container'>
+                        <div className='flexbox-bod'>
+                                <select name='dob_dd' className={this.state.disabled ? 'disabled flexbox-dd' : '' } type='text' value={this.state.dob_dd} disabled={disabled} onChange={this.handleDayChange}> 
+                                    {dayList}</select>&nbsp;
+                                <select name='dob_mm' className={this.state.disabled ? 'disabled flexbox-mm' : '' } type='text' value={this.state.dob_mm} disabled={disabled} onChange={this.handleMonthChange}>
+                                    {monthList}</select>&nbsp;
+                                <select name='dob_yy' className={this.state.disabled ? 'disabled flexbox-yy' : '' } type='text' value={this.state.dob_yy} disabled={disabled} onChange={this.handleYearChange}>
+                                    {yearList}</select>
+                        </div>
+                        <div className='flexbox-gender-country'>
+                                    <select name="gender" className={this.state.disabled ? 'disabled flexbox-gender' : ''} type='text' value={this.state.gender} disabled={disabled} onChange={this.handleGenderChange}>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                    <select name='countryList' className={this.state.disabled ? 'disabled flexbox-country' : ''} type='text' value={this.state.country} disabled={disabled} onChange={this.handleCountryChange}>
+                                        <option value='taiwan'>Taiwan</option>
+                                        <option value='chile'>Chile</option>
+                                    </select>
+                        </div>
                     </td>
                     <td>
                         {buttons}

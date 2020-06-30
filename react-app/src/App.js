@@ -211,6 +211,19 @@ class App extends React.Component {
       }
     )
   }
+  handleSortACountry(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending.country) {
+      direction = 'DESC';
+    }
+    this.sortField('country', direction);
+    this.setState( prevState =>{
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.country= !prevState.sortAscending.country;
+      return {sortAscending}
+      }
+    )
+  }
 
   handleSortClick(field) {
     if (field === 'id') {
@@ -227,6 +240,9 @@ class App extends React.Component {
     }
     if (field === 'gender') {
       return this.handleSortAGender.bind(this);
+    }
+    if (field === 'country') {
+      return this.handleSortACountry.bind(this);
     }
   }
 
@@ -263,6 +279,12 @@ class App extends React.Component {
     } else {
       fieldGender = <a onClick={this.handleSortClick('gender')}>Gender<span>&#8595;</span></a>;
     }
+    let fieldCountry;
+    if (this.state.sortAscending.country){
+      fieldCountry = <a onClick={this.handleSortClick('country')}>Country<span>&#8593;</span></a>;
+    } else {
+      fieldCountry = <a onClick={this.handleSortClick('country')}>Country<span>&#8595;</span></a>;
+    }
 
 
     return (
@@ -274,12 +296,14 @@ class App extends React.Component {
           <th className="text-center"></th>
           <th className="text-center fieldId">{fieldId}</th>
           <th className='text-center fieldFullName'>{fieldFullName}</th>
-          <th className='text-center fieldEmail'>{fieldEmail}</th>
-          <th className='text-center fieldPhoneNumber'>{fieldPhoneNumber}</th>
+          <th className='text-center fieldEmail-PhoneNumber'>
+            <div>{fieldEmail}</div>
+            <div>{fieldPhoneNumber}</div>
+          </th>
           <th className='text-center fieldAddress'>Address</th>
-          <th className='text-center birthDay'>Birth Day</th>
-          <th className="text-center fieldGender">{fieldGender}</th>
-          <th className="text-center county">Country</th>
+          <th className='text-center birthDay fieldGender fieldGender'>Birth Day 
+            <div> {fieldGender} &nbsp; {fieldCountry} </div>
+          </th>
           <th className='text-center action'>Action</th>
         </tr>
         </thead>

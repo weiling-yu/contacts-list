@@ -3,38 +3,71 @@
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
 }
-td  input .address{
-    text-transform: capitalize;
+div .address-container{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
-td .full_name, address {
-    text-transform: capitalize;
+
+.flexbox-address1, .flexbox-address2 {
+    display: flex ;
+    flex-grow: 1;
 }
-td .email {
-    text-transform: lowercase;
+
+.flexbox-street {
+    flex-grow: 1;
 }
-/* .fullNameList, .emailList, .numberList, .addressList{ */
+.flexbox-city {
+    flex-grow: 3;
+}
+.flexbox-state {
+    flex-grow: 1;
+}
+.flexbox-zip {
+    flex-grow: 2;
+}
+.flexbox-container {
+    display: flex;
+    flex-direction: column;
+}
+.flexbox-bod {
+    display: flex;
+    flex-grow: 1;
+}
+.flexbox-dd, .flexbox-mm{
+    flex-grow: 1;
+}
+.flexbox-yy {
+    flex-grow: 2;
+}
+.flexbox-gender-country{
+    display: flex;
+    flex-grow: 1;
+    /* justify-content: space-around; */
+    /* align-content: center; */
+}
+.flexbox-gender, .flexbox-country{
+    flex-grow: 1;
+}
+.email-number-container{
+    display: flex;
+    flex-direction: column;
+}
+.flexbox-number, .flexbox-email{
+    flex-grow: 1;
+}
+.table th, .table td{
+    padding: 0.3rem 0.35rem !important;
+    vertical-align: middle !important;;
+}
+
 tr .idList {
-    background-color: blueviolet;
-    width: 50px;
-    padding: 0px;
+    width: 40px;   
 }
-tr .fullNameList{
-    background-color: burlywood;
-    padding: 0px;
-}
-tr .emailList{
-    background-color: olive;
-    padding: 0px;
-}
-tr .numberList {
-    background-color: orange
-}
-tr .addressList {
-    background-color: peachpuff;
-}
-tr .addressList {
+/* tr .addressList {
     width: 300px;
-}
+} */
 /* input .idList {
     background-color: brown;
 }
