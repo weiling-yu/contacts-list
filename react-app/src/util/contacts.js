@@ -36,8 +36,9 @@ function deleteAllContatcs () {
     })
 }
 
-function insertContact (full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country) {
-    full_name = encodeURIComponent(full_name);
+function insertContact (first_name, last_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country) {
+    first_name = encodeURIComponent(first_name);
+    last_name = encodeURIComponent(last_name);
     email = encodeURIComponent(email);
     phone_number = encodeURIComponent(phone_number);
     street = encodeURIComponent(street);
@@ -50,7 +51,7 @@ function insertContact (full_name, email, phone_number, street, city, state, zip
     gender = encodeURIComponent(gender);
     country = encodeURIComponent(country);
 
-    let url = `http://localhost:4001/contacts/insert/${full_name}/${email}/${phone_number}/${street}/${city}/${state}/${zip_code}/${dob_dd}/${dob_mm}/${dob_yy}/${gender}/${country}`;
+    let url = `http://localhost:4001/contacts/insert/${first_name}/${last_name}/${email}/${phone_number}/${street}/${city}/${state}/${zip_code}/${dob_dd}/${dob_mm}/${dob_yy}/${gender}/${country}`;
     return fetch(url).then(response => {
         return response.json();
     }).then (jsonResponse =>{
@@ -58,8 +59,8 @@ function insertContact (full_name, email, phone_number, street, city, state, zip
     }) 
 }
 
-function editContactName (id,full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country){
-    let url = `http://localhost:4001/contacts/edit/${id}/${full_name}/${email}/${phone_number}/${street}/${city}/${state}/${zip_code}/${dob_dd}/${dob_mm}/${dob_yy}/${gender}/${country}`;
+function editContactName (id,first_name, last_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country){
+    let url = `http://localhost:4001/contacts/edit/${id}/${first_name}/${last_name}/${email}/${phone_number}/${street}/${city}/${state}/${zip_code}/${dob_dd}/${dob_mm}/${dob_yy}/${gender}/${country}`;
     return fetch(url
         ).then(response => {
             return response.json();

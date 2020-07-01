@@ -12,7 +12,8 @@ class Contact extends React.Component {
             readOnly: true,
             disabled: true,
             id: '',
-            full_name: '',
+            first_name: '',
+            last_name:'',
             email: '',
             phone_number: '',
             street : '',
@@ -30,7 +31,8 @@ class Contact extends React.Component {
         this.handleSaveClick = this.handleSaveClick.bind(this);
         this.hadleCancelClick = this.hadleCancelClick.bind(this);
 
-        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+        this.handleLastNameChange = this.handleLastNameChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleStreetChange = this.handleStreetChange.bind(this);
@@ -49,7 +51,8 @@ class Contact extends React.Component {
     componentWillMount (){
         this.setState({
             id: this.props.contact.id,
-            full_name: this.props.contact.full_name,
+            first_name: this.props.contact.first_name,
+            last_name: this.props.contact.last_name,
             email: this.props.contact.email,
             phone_number: this.props.contact.phone_number,
             street : this.props.contact.street,
@@ -76,10 +79,10 @@ class Contact extends React.Component {
         this.props.reload();
     }
 
-    editContact(id, full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country) {
+    editContact(id, first_name, last_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country) {
         // console.log(id, full_name, email, phone_number, address, birthday);
         // editContactName(1, 'a', 'a', 'a', 'a', 'a');
-        editContactName(id, full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
+        editContactName(id, first_name, last_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
             this.props.reload();
         })
     }
@@ -91,7 +94,7 @@ class Contact extends React.Component {
         });
     }
     handleSaveClick(){
-        this.editContact(this.state.id, this.state.full_name, this.state.email, this.state.phone_number, this.state.street, this.state.city, this.state.state, this.state.zip_code, this.state.dob_dd, this.state.dob_mm, this.state.dob_yy, this.state.gender, this.state.country);
+        this.editContact(this.state.id, this.state.first_name, this.state.last_name, this.state.email, this.state.phone_number, this.state.street, this.state.city, this.state.state, this.state.zip_code, this.state.dob_dd, this.state.dob_mm, this.state.dob_yy, this.state.gender, this.state.country);
         this.setState({
             readOnly: !this.state.readOnly,
             disabled: !this.state.disabled,
@@ -102,7 +105,8 @@ class Contact extends React.Component {
             readOnly: !this.state.readOnly,
             disabled: !this.state.disabled,
             id: this.props.contact.id,
-            full_name: this.props.contact.full_name,
+            first_name: this.props.contact.first_name,
+            last_name: this.props.contact.last_name,
             email: this.props.contact.email,
             phone_number: this.props.contact.phone_number,
             street : this.props.contact.street,
@@ -119,10 +123,15 @@ class Contact extends React.Component {
     }
 
     // handle input change methods
-    handleNameChange(e){
+    handleFirstNameChange(e){
         this.setState({
-            full_name: e.target.value,
+            first_name: e.target.value,
         });
+    }
+    handleLastNameChange(e){
+        this.setState({
+            last_name: e.target.value,
+        })
     }
     handleEmailChange(e){
         this.setState({
@@ -192,8 +201,7 @@ class Contact extends React.Component {
 
 
     render(){
-        // render not JS
-        // return JSX
+        // bottons
         let readOnly=this.state.readOnly;
         let disabled=this.state.disabled;
         let buttons;
@@ -234,15 +242,21 @@ class Contact extends React.Component {
 
         return ( 
                <tr className='text-center'>
-                    <td className='checkbox'><input type='checkbox' id={this.state.id} onChange={this.handleCheckbox}></input></td>
+                    <td className='checkbox'><input type='checkbox' id={this.state.id} onChange={this.handleCheckbox} size='3'></input></td>
                     <td className='idList'><input className="readOnly text-center idList" type="text" value={this.state.id} readOnly={readOnly}></input></td>
-                    <td className='fullNameList'><input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.full_name} readOnly={readOnly} onChange={this.handleNameChange} ></input></td>
-                    <td className='email-number-container'>
-                        <div className='flexbox-email'>
-                            <input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange} ></input>
-                        </div>
-                        <div className='flexbox-number'>
-                            <input className={this.state.readOnly ? 'readOnly text-center ' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange} ></input>
+                    <td className='fullNameList'>
+                        <div className='fullName-container'>
+                            
+                                <input className={this.state.readOnly ? 'readOnly text-center flexbox-firstName' : ''} type='text' value={this.state.first_name} readOnly={readOnly} onChange={this.handleFirstNameChange} ></input> 
+                            
+                                <input className={this.state.readOnly? 'readOnly text-center flexbox-lastName' : ''} type='text' value={this.state.last_name} readOnly={readOnly} onChange={this.handleLastNameChange}></input>
+                        </div>  
+                    </td>
+                    <td className='emailPhoneList'>
+                        <div className='email-phone-container'>
+                                <input className={this.state.readOnly ? 'readOnly text-center flexbox-email' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange} ></input>
+
+                                <input className={this.state.readOnly ? 'readOnly text-center flexbox-number' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange} ></input>
                         </div>
                     </td>
                     <td className='addressList'>
@@ -251,22 +265,23 @@ class Contact extends React.Component {
                                 <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center flexbox-street' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} ></input><br/>
                             </div>
                             <div className='flexbox-address2'>
-                                <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center flexbox-city' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15'></input>&nbsp;
-                                <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center flexbox-state' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='2'></input>&nbsp;
+                                <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center flexbox-city' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15' ></input>&nbsp;
+                                <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center flexbox-state' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='3'></input>&nbsp;
                                 <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center flexbox-zip' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='5'></input>
                             </div>
                         </div>
                     </td>
-                    <td className='flexbox-container'>
-                        <div className='flexbox-bod'>
-                                <select name='dob_dd' className={this.state.disabled ? 'disabled flexbox-dd' : '' } type='text' value={this.state.dob_dd} disabled={disabled} onChange={this.handleDayChange}> 
-                                    {dayList}</select>&nbsp;
-                                <select name='dob_mm' className={this.state.disabled ? 'disabled flexbox-mm' : '' } type='text' value={this.state.dob_mm} disabled={disabled} onChange={this.handleMonthChange}>
-                                    {monthList}</select>&nbsp;
-                                <select name='dob_yy' className={this.state.disabled ? 'disabled flexbox-yy' : '' } type='text' value={this.state.dob_yy} disabled={disabled} onChange={this.handleYearChange}>
-                                    {yearList}</select>
-                        </div>
-                        <div className='flexbox-gender-country'>
+                    <td className='dobList'>
+                        <div className='dob-gender-country-container'>
+                            <div className='flexbox-dob'>
+                                    <select name='dob_dd' className={this.state.disabled ? 'disabled flexbox-dd' : '' } type='text' value={this.state.dob_dd} disabled={disabled} onChange={this.handleDayChange}> 
+                                        {dayList}</select>&nbsp;
+                                    <select name='dob_mm' className={this.state.disabled ? 'disabled flexbox-mm' : '' } type='text' value={this.state.dob_mm} disabled={disabled} onChange={this.handleMonthChange}>
+                                        {monthList}</select>&nbsp;
+                                    <select name='dob_yy' className={this.state.disabled ? 'disabled flexbox-yy' : '' } type='text' value={this.state.dob_yy} disabled={disabled} onChange={this.handleYearChange}>
+                                        {yearList}</select>
+                            </div>
+                            <div className='flexbox-gender-country'>
                                     <select name="gender" className={this.state.disabled ? 'disabled flexbox-gender' : ''} type='text' value={this.state.gender} disabled={disabled} onChange={this.handleGenderChange}>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -275,6 +290,7 @@ class Contact extends React.Component {
                                         <option value='taiwan'>Taiwan</option>
                                         <option value='chile'>Chile</option>
                                     </select>
+                            </div>
                         </div>
                     </td>
                     <td>

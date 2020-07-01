@@ -3,18 +3,46 @@
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
 }
-div .address-container{
+
+
+.fullName-container {
     display: flex ;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
-
-.flexbox-address1, .flexbox-address2 {
+.flexbox-firstName, .flexbox-lastName{
     display: flex ;
     flex-grow: 1;
 }
 
+.email-phone-container{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.flexbox-email{
+    display: flex ;
+    flex-grow: 1;
+}
+.flexbox-number{
+    display: flex ;
+    flex-grow: 1;
+}
+.address-container {
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.flexbox-address1, .flexbox-address2 {
+    display: flex ;
+    flex-grow: 1;
+}
 .flexbox-street {
     flex-grow: 1;
 }
@@ -27,15 +55,20 @@ div .address-container{
 .flexbox-zip {
     flex-grow: 2;
 }
-.flexbox-container {
+.dob-gender-country-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
 }
 .flexbox-bod {
     display: flex;
     flex-grow: 1;
 }
-.flexbox-dd, .flexbox-mm{
+.flexbox-dd{
+    flex-grow: 1;
+}
+.flexbox-mm{
     flex-grow: 1;
 }
 .flexbox-yy {
@@ -44,17 +77,8 @@ div .address-container{
 .flexbox-gender-country{
     display: flex;
     flex-grow: 1;
-    /* justify-content: space-around; */
-    /* align-content: center; */
 }
 .flexbox-gender, .flexbox-country{
-    flex-grow: 1;
-}
-.email-number-container{
-    display: flex;
-    flex-direction: column;
-}
-.flexbox-number, .flexbox-email{
     flex-grow: 1;
 }
 .table th, .table td{

@@ -6,7 +6,8 @@ import NewContact from './Components/NewContact/NewContacts';
 
 let contact = {
   id: '',
-  full_name: '',
+  first_name: '',
+  last_name:'',
   email: '',
   phone_number: '',
   address : '',
@@ -28,7 +29,8 @@ class App extends React.Component {
       deleteIds: [],
       sortAscending: {
         id: true,
-        full_name: true,
+        first_name: true,
+        last_name: true,
         email: true,
         phone_number: true,
         gender: true,
@@ -161,15 +163,27 @@ class App extends React.Component {
       return {sortAscending}
       })
   }
-  handleSortFullName(e){
+  handleSortFirstName(e){
     let direction = 'ASC';
-    if (!this.state.sortAscending.full_name) {
+    if (!this.state.sortAscending.first_name) {
       direction = 'DESC';
     }
-    this.sortField('full_name', direction);
+    this.sortField('first_name', direction);
     this.setState( prevState =>{
       let sortAscending= {...prevState.sortAscending};
-      sortAscending.full_name= !prevState.sortAscending.full_name;
+      sortAscending.first_name= !prevState.sortAscending.first_name;
+      return {sortAscending};
+    })
+  }
+  handleSortLastName(e){
+    let direction = 'ASC';
+    if (!this.state.sortAscending.last_name) {
+      direction = 'DESC';
+    }
+    this.sortField('last_name', direction);
+    this.setState( prevState =>{
+      let sortAscending= {...prevState.sortAscending};
+      sortAscending.last_name= !prevState.sortAscending.last_name;
       return {sortAscending};
     })
   }
@@ -198,7 +212,7 @@ class App extends React.Component {
       return {sortAscending};
     })
   }
-  handleSortAGender(e){
+  handleSortGender(e){
     let direction = 'ASC';
     if (!this.state.sortAscending.gender) {
       direction = 'DESC';
@@ -230,7 +244,10 @@ class App extends React.Component {
       return this.handleSortId.bind(this);
     }
     if (field === 'full_name') {
-      return this.handleSortFullName.bind(this);
+      return this.handleSortFirstName.bind(this);
+    }
+    if (field === 'last_name') {
+      return this.handleSortLastName.bind(this);
     }
     if (field === 'email') {
       return this.handleSortEmail.bind(this);
@@ -239,7 +256,7 @@ class App extends React.Component {
       return this.handleSortPhoneNumber.bind(this);
     }
     if (field === 'gender') {
-      return this.handleSortAGender.bind(this);
+      return this.handleSortGender.bind(this);
     }
     if (field === 'country') {
       return this.handleSortACountry.bind(this);
@@ -254,11 +271,17 @@ class App extends React.Component {
     } else {
       fieldId = <a onClick={this.handleSortClick('id')}>ID<span>&#8595;</span></a>;
     }
-    let fieldFullName;
+    let fieldFirstName;
     if (this.state.sortAscending.full_name){
-      fieldFullName = <a onClick={this.handleSortClick('full_name')}>Full Name<span>&#8593;</span></a>;
+      fieldFirstName = <a onClick={this.handleSortClick('fist_name')}>First Name<span>&#8593;</span></a>;
     } else {
-      fieldFullName = <a onClick={this.handleSortClick('full_name')}>Full Name<span>&#8595;</span></a>;
+      fieldFirstName = <a onClick={this.handleSortClick('first_name')}>First Name<span>&#8595;</span></a>;
+    }
+    let fieldLastName;
+    if (this.state.sortAscending.last_name){
+      fieldLastName = <a onClick={this.handleSortClick('last_name')}>Last Name<span>&#8593;</span></a>;
+    } else {
+      fieldLastName = <a onClick={this.handleSortClick('last_name')}>Last Name<span>&#8595;</span></a>;
     }
     let fieldEmail;
     if (this.state.sortAscending.email){
@@ -295,7 +318,10 @@ class App extends React.Component {
         <tr className='thead-dark'>
           <th className="text-center"></th>
           <th className="text-center fieldId">{fieldId}</th>
-          <th className='text-center fieldFullName'>{fieldFullName}</th>
+          <th className='text-center fieldFullName'>
+            <div>{fieldFirstName}</div>
+            <div>{fieldLastName}</div>
+          </th>
           <th className='text-center fieldEmail-PhoneNumber'>
             <div>{fieldEmail}</div>
             <div>{fieldPhoneNumber}</div>

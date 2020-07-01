@@ -170,7 +170,7 @@ class NewContact extends React.Component {
                     <table className='table table-striped table-contacts'>
                         <thead>
                         <tr className='thead-dark'>
-                            <th className="text-center id">ID</th>
+                            <th className="text-center fieldId">ID</th>
                             <th className='text-center fullName'>Full Name</th>
                             <th className='text-center email'>Email</th>
                             <th className='text-center phone_number'>Phone</th>
