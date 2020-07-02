@@ -84,6 +84,7 @@
 .table th, .table td{
     padding: 0.3rem 0.35rem !important;
     vertical-align: middle !important;;
+    /* s */
 }
 
 tr .idList {

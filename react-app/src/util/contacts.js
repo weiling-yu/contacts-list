@@ -78,10 +78,18 @@ function sortField (field, direction){
             return jsonResponse
         });
 }
+function search (id){
+    let url = `http://localhost:4001/contacts/search/${id}`;
+    return fetch (url
+        ).then(response =>{
+            return response.json();
+        }).then(jsonResponse =>{
+            return jsonResponse
+        });
+}
 
 
-
-export {getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId, sortField };
+export {getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId, sortField, search };
 
 //import { response } from "express"
 // function getContacts (){

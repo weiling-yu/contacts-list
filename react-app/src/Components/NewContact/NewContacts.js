@@ -7,7 +7,8 @@ class NewContact extends React.Component {
         super()
         this.state = {
             id: '',
-            full_name: '',
+            first_name: '',
+            last_name:'',
             email: '',
             phone_number: '',
             street : '',
@@ -22,7 +23,8 @@ class NewContact extends React.Component {
         };
         this.handleInsertClick = this.handleInsertClick.bind(this);
 
-        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+        this.handleLastNameChange = this.handleLastNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleStreetChange = this.handleStreetChange.bind(this);
@@ -36,13 +38,14 @@ class NewContact extends React.Component {
         this.handleCountryChange = this.handleCountryChange.bind(this);
     }
 
-    insertData (full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country){
-        insertContact(full_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
+    insertData (first_name, last_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country){
+        insertContact(first_name, last_name, email, phone_number, street, city, state, zip_code, dob_dd, dob_mm, dob_yy, gender, country).then(()=>{
             this.props.reload();
         });
         this.setState({
             id: '',
-            full_name: '',
+            first_name: '',
+            last_name:'',
             email: '',
             phone_number: '',
             street : '',
@@ -59,7 +62,8 @@ class NewContact extends React.Component {
 
     handleInsertClick(){        
         this.insertData(
-            this.state.full_name, 
+            this.state.first_name, 
+            this.state.last_name,
             this.state.email, 
             this.state.phone_number, 
             this.state.street, 
@@ -73,9 +77,14 @@ class NewContact extends React.Component {
             this.state.country);
     }
 
-    handleNameChange(e){
+    handleFirstNameChange(e){
         this.setState({
-            full_name: e.target.value,
+            first_name: e.target.value,
+        });
+    }
+    handleLastNameChange(e){
+        this.setState({
+            last_name: e.target.value,
         });
     }
     handleEmailChange(e){
@@ -169,30 +178,49 @@ class NewContact extends React.Component {
                 <h1>Create New Contact</h1>
                     <table className='table table-striped table-contacts'>
                         <thead>
-                        <tr className='thead-dark'>
-                            <th className="text-center fieldId">ID</th>
-                            <th className='text-center fullName'>Full Name</th>
-                            <th className='text-center email'>Email</th>
-                            <th className='text-center phone_number'>Phone</th>
-                            <th className='text-center address'>Address</th>
-                            <th className='text-center birthDay'>Birth Day</th>
-                            <th className="text-center gender">Gender</th>
-                            <th className="text-center county">Country</th>
+                        <tr className='table-striped table-contacts thead-dark'>
+                            <th className="text-center fieldId-new-cl">ID</th>
+                            <th className='text-center fieldFullName'>
+                                <div>First Name</div>
+                                <div>Last Name</div>
+                            </th>
+                            <th className='text-center fieldEmail-PhoneNumber'>
+                                <div>Email</div>
+                                <div>Phone</div>
+                            </th>
+                            <th className='text-center fieldAddress'>Address</th>
+                            <th className='text-center fieldBirthDay-Gender-country'>Birth Day
+                                <div>Gender &nbsp; Country</div>
+                            </th>
                             <th className='text-center action'>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr className='thead-dark'>
-                            <td className='text-center input-id'><input type='text' value={this.state.id} readOnly></input></td>
-                            <td className='text-center input-name'><input type='text' value={this.state.full_name} onChange={this.handleNameChange}></input></td>
-                            <td className='text-center input-email'><input type='text' value={this.state.email} onChange={this.handleEmailChange}></input ></td>
-                            <td className='text-center input-number'><input type='text' value={this.state.phone_number} onChange={this.handlePhoneChange}></input></td>
-
+                            <td className='text-center input-id'><input type='text' value={this.state.id} readOnly size='3' placeholder='-'></input></td>
+                            <td>
+                                <div className='fullName-container'>
+                                    <input id='cap-new-name' type='text' value={this.state.first_name} onChange={this.handleFirstNameChange} className='flexbox-firstName' placeholder='first name'></input>
+                                    <input id='cap-new-name' type='text' vaule={this.state.last_name} onChange={this.handleLastNameChange} className='flexbox-lastName' placeholder='last name'></input>
+                                </div>
+                            </td>
+                            <td className='text-center input-email'>
+                                <div className="email-phone-container">
+                                    <input id='lowercase' type='text' value={this.state.email} onChange={this.handleEmailChange} className='flexbox-email' placeholder='email'></input >
+                                    <input type='text' value={this.state.phone_number} onChange={this.handlePhoneChange} className='flexbox-number' placeholder='phone number'></input>
+                                </div>
+                            </td>
                             <td className='text-center address'>
-                                <input type='text' className='input-street' value={this.state.street} onChange={this.handleStreetChange} placeholder='street' size='25'></input >&nbsp;
-                                <input type='text' className='input-city' value={this.state.city} onChange={this.handleCityChange} placeholder='city' size='15'></input >&nbsp;
-                                <input type='text' className='input-state' value={this.state.state} onChange={this.handleStateChange} placeholder='state' size='3'></input >&nbsp;
-                                <input type='text' className='input-zip-code' value={this.state.zip_code} onChange={this.handleZipCodeChange} placeholder='zip code' size='6'></input >
+                                <div className='address-container'>
+                                    <div className='flexbox-address1'> 
+                                        <input id='cap' type='text' className='input-street' value={this.state.street} onChange={this.handleStreetChange} className='flexbox-street' placeholder='street'></input >&nbsp;
+                                    </div>
+                                    <div className='flexbox-address2'>
+                                        <input id='cap' type='text' className='input-city' value={this.state.city} onChange={this.handleCityChange} className='flexbox-city' placeholder='city' size='15'></input >&nbsp;
+                                        <input id='uppercase' type='text' className='input-state' value={this.state.state} onChange={this.handleStateChange} className='flexbox-state' placeholder='state' size='3'></input >&nbsp;
+                                        <input type='text' className='input-zip-code' value={this.state.zip_code} onChange={this.handleZipCodeChange} className='flexbox-zip' placeholder='zip code' size='6'></input >
+                                    </div>
+                                </div>
                             </td>
 
                             {/* <td className='text-center'><input type='text' id='birthday' value={this.state.birthday} onChange={this.handleBirthdayChange}></input ></td> */}
@@ -204,32 +232,35 @@ class NewContact extends React.Component {
                             </td> */}
 
                             <td className='text-center'>
-                                <select name='dob_dd' value={this.state.dob_dd} onChange={this.handleDayChange}>
-                                    {dayList}
-                                </select>&nbsp;
-                                <select name='dob_mm' value={this.state.dob_mm} onChange={this.handleMonthChange}>
-                                    {monthList}
-                                </select>&nbsp;
-                                <select name='dob_yy' value={this.state.dob_yy} onChange={this.handleYearChange}>
-                                    {yearList}
-                                </select>
-                            </td>
+                                <div className='dob-gender-country-container'>
+                                    <div className='flexbox-dob'>
+                                        <select name='dob_dd' value={this.state.dob_dd} className='flexbox-dd' onChange={this.handleDayChange}>
+                                            {dayList}
+                                        </select>&nbsp;
+                                        <select name='dob_mm' value={this.state.dob_mm} className='flexbox-mm' onChange={this.handleMonthChange}>
+                                            {monthList}
+                                        </select>&nbsp;
+                                        <select name='dob_yy' value={this.state.dob_yy} className='flexbox-yy' onChange={this.handleYearChange}>
+                                            {yearList}
+                                        </select>
+                                    </div>
 
-                            <td className='text-center'>
-                                <select name='gender' value={this.state.gender} onChange={this.handleGenderChange}>
-                                    <option value=''></option>
-                                    <option value='male'>male</option>
-                                    <option value='female'>female</option>
-                                </select></td>
-                            <td className='text-center'>
-                                <select name='country' value={this.state.country} onChange={this.handleCountryChange}>
-                                    <option value=''></option>
-                                    <option value='taiwan'>Taiwan</option>
-                                    <option value='chile'>Chile</option>
-                                </select>
+                                    <div classNmae='flexbox-gender-country'>
+                                        <select name='gender' value={this.state.gender} className='flexbox-gender' onChange={this.handleGenderChange}>
+                                            <option value=''>Gender</option>
+                                            <option value='male'>male</option>
+                                            <option value='female'>female</option>
+                                        </select>
+                                        <select name='country' value={this.state.country} className='flexbox-country' onChange={this.handleCountryChange}>
+                                            <option value=''>Country</option>
+                                            <option value='taiwan'>Taiwan</option>
+                                            <option value='chile'>Chile</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                <button className = "btn btn-light" onClick={this.handleInsertClick}>Add</button>
+                                <button className = "btn btn-light button-add" onClick={this.handleInsertClick}>Add</button>
                             </td>
                         </tr>
                         </tbody>

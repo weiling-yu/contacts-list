@@ -21,6 +21,18 @@ app.use(function(req, res, next) {
 });
 
 
+app.get('/contacts/search/:id', (req, res, next) => {
+  let searchId = req.params.id;
+  let sql = `SELECT * from contacts WHERE id=${searchId}`;
+    connection.query(sql, function (error, results, fields) {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(results);
+        }
+      });
+});
+
 app.get('/contacts/', (req, res, next) => {
   let sql = `SELECT * from contacts`;
     connection.query(sql, function (error, results, fields) {
@@ -150,5 +162,7 @@ app.get('/contacts/:field/:direction', (req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
+
+
  
 // connection.end();

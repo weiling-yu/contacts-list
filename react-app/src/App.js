@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import { getContacts, deleteContactName, insertContact, editContactName, deleteAllContatcs, deleteContactId, sortField } from './util/contacts';
+import { getContacts, insertContact, editContactName, deleteAllContatcs, deleteContactId, sortField, search } from './util/contacts';
 import Contact from './Components/Contact/Contact';
 import NewContact from './Components/NewContact/NewContacts';
+import SearchBar from './Components/SearchBar/SearchBar';
 
 let contact = {
   id: '',
@@ -49,6 +50,7 @@ class App extends React.Component {
     this.deleteSelectedContact = this.deleteSelectedContact.bind(this);
     this.handleDeleteSelected = this.handleDeleteSelected.bind(this);
     this.handleSortId = this.handleSortId.bind(this);
+    this.searchContact = this.searchContact.bind(this);
   }
 
   componentDidMount() {
@@ -261,8 +263,14 @@ class App extends React.Component {
     if (field === 'country') {
       return this.handleSortACountry.bind(this);
     }
-  }
-
+   }
+   searchContact(id){
+     let result = search(id).then(data=>{
+       this.setState({
+         contacts: data
+       });
+     })
+   }
 
   render () {
     let fieldId;
@@ -312,6 +320,7 @@ class App extends React.Component {
 
     return (
     <div className="App">
+      <SearchBar search={this.searchContact}/>
       <h1>Contact List App</h1>
       <table className='table table-striped table-contacts'>
         <thead>
@@ -327,7 +336,7 @@ class App extends React.Component {
             <div>{fieldPhoneNumber}</div>
           </th>
           <th className='text-center fieldAddress'>Address</th>
-          <th className='text-center birthDay fieldGender fieldGender'>Birth Day 
+          <th className='text-center fieldBirthDay-Gender-country'>Birth Day 
             <div> {fieldGender} &nbsp; {fieldCountry} </div>
           </th>
           <th className='text-center action'>Action</th>

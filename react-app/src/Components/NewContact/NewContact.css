@@ -3,15 +3,113 @@
     text-transform: uppercase;
     text-align: center;
 }
-input .input-state {
-    text-transform: uppercase;
-}
-td .input-full_name, .input-address {
+#cap #cap-new-name{
     text-transform: capitalize;
 }
-td .input-email {
+
+#lowercase{
     text-transform: lowercase;
 }
+#uppercase{
+    text-transform: uppercase;
+}
+.fullName-container {
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+}
+.flexbox-firstName, .flexbox-lastName{
+    display: flex ;
+    flex-grow: 1;
+    
+}
+
+.email-phone-container{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+}
+.flexbox-email{
+    display: flex ;
+    flex-grow: 1;
+}
+.flexbox-number{
+    display: flex ;
+    flex-grow: 1;
+}
+.address-container {
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.flexbox-address1, .flexbox-address2 {
+    display: flex ;
+    flex-grow: 1;
+}
+.flexbox-street {
+    flex-grow: 1;
+}
+.flexbox-city {
+    flex-grow: 3;
+}
+.flexbox-state {
+    flex-grow: 1;
+}
+.flexbox-zip {
+    flex-grow: 2;
+}
+.dob-gender-country-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.flexbox-bod {
+    display: flex;
+    flex-grow: 1;
+}
+.flexbox-dd{
+    flex-grow: 1;
+}
+.flexbox-mm{
+    flex-grow: 1;
+}
+.flexbox-yy {
+    flex-grow: 2;
+}
+.flexbox-gender-country{
+    display: flex;
+    flex-grow: 1;
+}
+.flexbox-gender, .flexbox-country{
+    flex-grow: 1;
+}
+.table th, .table td{
+    padding: 0.3rem 0.35rem !important;
+    vertical-align: middle !important;;
+    
+}
+select {
+    border: solid 0.5px  rgba(118, 118, 118, 0.3);
+    border-radius: 0.2rem;
+    opacity: 0.7;
+    
+}
+.fieldId-new-cl{
+    width: 72px;
+}
+.button-add{
+    width: 154px;
+}
+
 
 /* .app {
     border-radius: 50px;

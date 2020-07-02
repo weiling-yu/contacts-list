@@ -246,28 +246,25 @@ class Contact extends React.Component {
                     <td className='idList'><input className="readOnly text-center idList" type="text" value={this.state.id} readOnly={readOnly}></input></td>
                     <td className='fullNameList'>
                         <div className='fullName-container'>
-                            
-                                <input className={this.state.readOnly ? 'readOnly text-center flexbox-firstName' : ''} type='text' value={this.state.first_name} readOnly={readOnly} onChange={this.handleFirstNameChange} ></input> 
-                            
-                                <input className={this.state.readOnly? 'readOnly text-center flexbox-lastName' : ''} type='text' value={this.state.last_name} readOnly={readOnly} onChange={this.handleLastNameChange}></input>
+                                <input id='cap' className={this.state.readOnly ? 'readOnly text-center flexbox-firstName' : ''} type='text' value={this.state.first_name} readOnly={readOnly} onChange={this.handleFirstNameChange} ></input> 
+                                <input id='cap'className={this.state.readOnly? 'readOnly text-center flexbox-lastName' : ''} type='text' value={this.state.last_name} readOnly={readOnly} onChange={this.handleLastNameChange}></input>
                         </div>  
                     </td>
                     <td className='emailPhoneList'>
                         <div className='email-phone-container'>
-                                <input className={this.state.readOnly ? 'readOnly text-center flexbox-email' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange} ></input>
-
+                                <input id='lowercase' className={this.state.readOnly ? 'readOnly text-center flexbox-email' : ''} type='text' value={this.state.email} readOnly={readOnly} onChange={this.handleEmailChange} ></input>
                                 <input className={this.state.readOnly ? 'readOnly text-center flexbox-number' : ''} type='text' value={this.state.phone_number} readOnly={readOnly} onChange={this.handlePhoneChange} ></input>
                         </div>
                     </td>
                     <td className='addressList'>
                         <div className='address-container'>
                             <div className='flexbox-address1'>
-                                <input placeholder='street' className={this.state.readOnly ? 'readOnly text-center flexbox-street' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} ></input><br/>
+                                <input id='cap' placeholder='street' className={this.state.readOnly ? 'readOnly text-center flexbox-street' : ''} type='text' value={this.state.street} readOnly={readOnly} onChange={this.handleStreetChange} ></input><br/>
                             </div>
                             <div className='flexbox-address2'>
-                                <input placeholder='city' className={this.state.readOnly ? 'readOnly text-center flexbox-city' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15' ></input>&nbsp;
-                                <input className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center flexbox-state' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='3'></input>&nbsp;
-                                <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center flexbox-zip' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='5'></input>
+                                <input id='cap' placeholder='city' className={this.state.readOnly ? 'readOnly text-center flexbox-city' : ''} type='text' value={this.state.city} readOnly={readOnly} onChange={this.handleCityChange} size='15' ></input>&nbsp;
+                                <input id='uppercase' className ='state' placeholder='state' className={this.state.readOnly ? 'readOnly text-center flexbox-state' : ''} type='text' value={this.state.state} readOnly={readOnly} onChange={this.handleStateChange} size='3'></input>&nbsp;
+                                <input placeholder='zip code' className={this.state.readOnly ? 'readOnly text-center flexbox-zip' : ''} type='text' value={this.state.zip_code} readOnly={readOnly} onChange={this.handleZipCodeChange} size='6'></input>
                             </div>
                         </div>
                     </td>

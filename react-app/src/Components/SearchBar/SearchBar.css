@@ -1,0 +1,12 @@
+.SearchBar-fields {
+    padding-top: 10px;;
+    text-align: center;
+}
+.search-input {
+    width:200px;
+    height: 42px;
+    border-radius: 5px;
+}
+.searchBtn {
+    padding-top: -2px !important;
+}
