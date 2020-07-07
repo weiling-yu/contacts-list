@@ -21,9 +21,10 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/contacts/search/:id', (req, res, next) => {
-  let searchId = req.params.id;
-  let sql = `SELECT * from contacts WHERE id=${searchId}`;
+app.get('/contacts/search/:field/:input', (req, res, next) => {
+  let searchField = req.params.field;
+  let searchInput  = req.params.input;
+  let sql = `SELECT * from contacts WHERE ${searchField}='${searchInput}'`;
     connection.query(sql, function (error, results, fields) {
         if (error) {
             res.send(error);

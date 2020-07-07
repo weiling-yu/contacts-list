@@ -199,25 +199,25 @@ class NewContact extends React.Component {
                         <tr className='thead-dark'>
                             <td className='text-center input-id'><input type='text' value={this.state.id} readOnly size='3' placeholder='-'></input></td>
                             <td>
-                                <div className='fullName-container'>
-                                    <input id='cap-new-name' type='text' value={this.state.first_name} onChange={this.handleFirstNameChange} className='flexbox-firstName' placeholder='first name'></input>
-                                    <input id='cap-new-name' type='text' vaule={this.state.last_name} onChange={this.handleLastNameChange} className='flexbox-lastName' placeholder='last name'></input>
+                                <div className='fullName-container cap-new-name'>
+                                    <input className='cap-new-name' type='text' value={this.state.first_name} onChange={this.handleFirstNameChange} className='flexbox-firstName' placeholder='first name'></input>
+                                    <input className='cap-new-name' type='text' vaule={this.state.last_name} onChange={this.handleLastNameChange} className='flexbox-lastName' placeholder='last name'></input>
                                 </div>
                             </td>
                             <td className='text-center input-email'>
                                 <div className="email-phone-container">
-                                    <input id='lowercase' type='text' value={this.state.email} onChange={this.handleEmailChange} className='flexbox-email' placeholder='email'></input >
+                                    <input className='lowercase' type='text' value={this.state.email} onChange={this.handleEmailChange} className='flexbox-email' placeholder='email'></input >
                                     <input type='text' value={this.state.phone_number} onChange={this.handlePhoneChange} className='flexbox-number' placeholder='phone number'></input>
                                 </div>
                             </td>
                             <td className='text-center address'>
                                 <div className='address-container'>
                                     <div className='flexbox-address1'> 
-                                        <input id='cap' type='text' className='input-street' value={this.state.street} onChange={this.handleStreetChange} className='flexbox-street' placeholder='street'></input >&nbsp;
+                                        <input className='cap' type='text' className='input-street' value={this.state.street} onChange={this.handleStreetChange} className='flexbox-street' placeholder='street'></input >&nbsp;
                                     </div>
                                     <div className='flexbox-address2'>
-                                        <input id='cap' type='text' className='input-city' value={this.state.city} onChange={this.handleCityChange} className='flexbox-city' placeholder='city' size='15'></input >&nbsp;
-                                        <input id='uppercase' type='text' className='input-state' value={this.state.state} onChange={this.handleStateChange} className='flexbox-state' placeholder='state' size='3'></input >&nbsp;
+                                        <input iclassNamed='cap' type='text' className='input-city' value={this.state.city} onChange={this.handleCityChange} className='flexbox-city' placeholder='city' size='15'></input >&nbsp;
+                                        <input className='uppercase' type='text' className='input-state' value={this.state.state} onChange={this.handleStateChange} className='flexbox-state' placeholder='state' size='3'></input >&nbsp;
                                         <input type='text' className='input-zip-code' value={this.state.zip_code} onChange={this.handleZipCodeChange} className='flexbox-zip' placeholder='zip code' size='6'></input >
                                     </div>
                                 </div>

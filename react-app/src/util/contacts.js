@@ -78,8 +78,8 @@ function sortField (field, direction){
             return jsonResponse
         });
 }
-function search (id){
-    let url = `http://localhost:4001/contacts/search/${id}`;
+function search (field, input){
+    let url = `http://localhost:4001/contacts/search/${field}/${input}`;
     return fetch (url
         ).then(response =>{
             return response.json();

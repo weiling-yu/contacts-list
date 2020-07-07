@@ -5,29 +5,51 @@ export class SearchBar extends React.Component {
     constructor(){
         super()
         this.state = {
-            id:'',
+            // id:'',
+            // first_name:'',
+            // last_name:'',
+            // phone_number:'',
+            // email:'',
+            // gender:'',
+            // counry:'',
+            field: '',
+            input: '',
         };
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleIdChange = this.handleIdChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
     }
     handleSearch(e){
-        this.props.search(this.state.id);
+        this.props.search(this.state.field, this.state.input);
     }
-    handleIdChange(e){
+    handleInputChange(e){
         this.setState({
-            id: e.target.value,
+            input: e.target.value,
         })
     }
 
-    // componentDidMount() {
-    //     this.handleSearch();
-    // }
+    handleFieldChange(e){
+        this.setState({
+            field: e.target.value,
+        })
+    }
 
     render(){
         return(
             <div className="SearchBar">
                 <div className="SearchBar-fields">
-                    <input className='search-input' placeholder="Search Contatct By ID" onChange={this.handleIdChange} value={this.state.id} /> &nbsp;
+                    <input className='search-input' placeholder="Search Contatct" onChange={this.handleInputChange} value={this.state.id} /> &nbsp;
+                    <select className='searchBy'onChange={this.handleFieldChange}>
+                        <option>Search by</option>
+                        <option value='id'>ID</option>
+                        <option value='first_name'>First Name</option>
+                        <option value='last_name'>Last Name</option>
+                        <option value='phone_number'>Phone Number</option>
+                        <option value='email'>Email</option>
+                        <option value='city'>City</option>
+                        <option value='gender'>Gender</option>
+                        <option value='country'>Country</option>
+                    </select>
                     <a className="btn btn-info searchBtn" onClick={this.handleSearch}>Search</a>
                 </div>
                 <div className="SearchBar-submit">

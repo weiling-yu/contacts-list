@@ -174,8 +174,8 @@ class App extends React.Component {
     this.setState( prevState =>{
       let sortAscending= {...prevState.sortAscending};
       sortAscending.first_name= !prevState.sortAscending.first_name;
-      return {sortAscending};
-    })
+      return {sortAscending}
+      })
   }
   handleSortLastName(e){
     let direction = 'ASC';
@@ -245,7 +245,7 @@ class App extends React.Component {
     if (field === 'id') {
       return this.handleSortId.bind(this);
     }
-    if (field === 'full_name') {
+    if (field === 'first_name') {
       return this.handleSortFirstName.bind(this);
     }
     if (field === 'last_name') {
@@ -264,8 +264,8 @@ class App extends React.Component {
       return this.handleSortACountry.bind(this);
     }
    }
-   searchContact(id){
-     let result = search(id).then(data=>{
+   searchContact(field, input){
+     let result = search(field, input).then(data=>{
        this.setState({
          contacts: data
        });
@@ -280,8 +280,8 @@ class App extends React.Component {
       fieldId = <a onClick={this.handleSortClick('id')}>ID<span>&#8595;</span></a>;
     }
     let fieldFirstName;
-    if (this.state.sortAscending.full_name){
-      fieldFirstName = <a onClick={this.handleSortClick('fist_name')}>First Name<span>&#8593;</span></a>;
+    if (this.state.sortAscending.first_name){
+      fieldFirstName = <a onClick={this.handleSortClick('first_name')}>First Name<span>&#8593;</span></a>;
     } else {
       fieldFirstName = <a onClick={this.handleSortClick('first_name')}>First Name<span>&#8595;</span></a>;
     }

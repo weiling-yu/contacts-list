@@ -3,14 +3,14 @@
     text-transform: uppercase;
     text-align: center;
 }
-#cap #cap-new-name{
+.cap, .cap-new-name{
     text-transform: capitalize;
 }
 
-#lowercase{
+.lowercase{
     text-transform: lowercase;
 }
-#uppercase{
+.uppercase{
     text-transform: uppercase;
 }
 .fullName-container {

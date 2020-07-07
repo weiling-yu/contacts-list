@@ -22,7 +22,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    
 }
 .flexbox-email{
     display: flex ;
@@ -84,7 +84,6 @@
 .table th, .table td{
     padding: 0.3rem 0.35rem !important;
     vertical-align: middle !important;;
-    /* s */
 }
 
 tr .idList {
